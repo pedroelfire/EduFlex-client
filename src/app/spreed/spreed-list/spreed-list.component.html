@@ -1,0 +1,48 @@
+<p-table [value]="students" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Calificación Actual</th> <!-- Nueva columna -->
+      <th *ngFor="let criterio of getCriteriosHeaders()">{{ criterio }}</th>
+      <th>Acciones</th> <!-- Nueva columna para el botón -->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-student>
+    <tr>
+      <td>{{ student.nombres }}</td>
+      <td>{{ student.apellidos }}</td>
+      <td>
+        <p-tag [value]="getCalificacionActual(student).toString()" [severity]="'success'"></p-tag>
+      </td>
+      <td *ngFor="let criterio of student.criterios">
+        <div class="mb-2 w-full">
+          <label for="calificacion">Calificación:</label>
+          <input class="w-4 ml-2" pInputText id="calificacion" type="number" [(ngModel)]="criterio.calificacion" placeholder="Calificación" min="0" max="10" (ngModelChange)="validatePorcentajes(student)" />
+        </div>
+        <div>
+          <label for="porcentaje">Porcentaje:</label>
+          <input pInputText class="w-4 ml-2" id="porcentaje" type="number" [(ngModel)]="criterio.porcentaje" placeholder="Porcentaje" min="0" max="100" (ngModelChange)="validatePorcentajes(student)" />
+        </div>
+      </td>
+      <td>
+        <button pButton label="Detalles" icon="pi pi-info-circle" (click)="showDetails(student)"></button> <!-- Botón para detalles -->
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-messages *ngIf="percentageWarning" severity="warn" text="Los porcentajes no suman 100%"></p-messages>
+
+<p-dialog header="Detalles del Alumno" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{ width: '50vw' }" (onHide)="onDialogHide()">
+  <ng-template pTemplate="header">
+    <h2>{{ selectedStudent?.nombres }} {{ selectedStudent?.apellidos }}</h2>
+  </ng-template>
+  <ng-template pTemplate="body">
+    <h3>Observaciones:</h3>
+    <p-editor [(ngModel)]="selectedStudent.observaciones" placeholder="'Escribe tus observaciones aquí...'"></p-editor>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton label="Cerrar" icon="pi pi-times" (click)="displayDialog = false"></button>
+  </ng-template>
+</p-dialog>

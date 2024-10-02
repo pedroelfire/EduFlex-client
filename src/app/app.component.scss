@@ -1,0 +1,20 @@
+.custom-menubar {
+  background-color: #f7f7f7; /* Color de fondo suave */
+  border: 1px solid #e0e0e0; /* Bordes suaves */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+
+  .p-menuitem-link {
+      color: #333; /* Color del texto */
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+          background-color: #e0e0e0; /* Fondo al pasar el ratón */
+          color: #007ad9; /* Color del texto al pasar el ratón */
+      }
+  }
+
+  .p-badge {
+      background-color: #007ad9; /* Color de las etiquetas */
+      color: #fff; /* Color del texto de las etiquetas */
+  }
+}

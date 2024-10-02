@@ -1,0 +1,64 @@
+<div class="flex align-items-center justify-content-center min-h-screen">
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-8">
+        <h2 class="text-900 text-2xl font-medium mb-4 text-center">Crear Nuevo Grupo</h2>
+
+        <!-- Sección para añadir alumnos -->
+        <div class="mb-4">
+            <h3 class="text-900 text-xl font-medium">Registrar Alumnos</h3>
+            <div class="flex align-items-center mb-2">
+                <input pInputText placeholder="Nombre" [(ngModel)]="newStudentName" class="w-5 mr-2" />
+                <input pInputText placeholder="Apellido" [(ngModel)]="newStudentLastName" class="w-5 mr-2" />
+                <button pButton label="Añadir Alumno" icon="pi pi-plus" (click)="addStudent()"></button>
+            </div>
+            <p-table [value]="students" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-student>
+                    <tr>
+                        <td>{{ student.nombre }}</td>
+                        <td>{{ student.apellido }}</td>
+                        <td>
+                            <button pButton icon="pi pi-times" (click)="removeStudent(student)" class="p-button-danger"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- Sección para definir criterios de evaluación -->
+        <div class="mb-4">
+            <h3 class="text-900 text-xl font-medium">Definir Criterios de Evaluación</h3>
+            <div class="flex align-items-center mb-2">
+                <input pInputText placeholder="Criterio de Evaluación" [(ngModel)]="newCriterion" class="w-5 mr-2" />
+                <input pInputText placeholder="Porcentaje" [(ngModel)]="newCriterionPercentage" type="number" class="w-5 mr-2" min="0" max="100" />
+                <button pButton label="Añadir Criterio" icon="pi pi-plus" (click)="addCriterion()"></button>
+            </div>
+            <p-table [value]="criteria" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Porcentaje</th>
+                        <th>Acciones</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-criterion>
+                    <tr>
+                        <td>{{ criterion.nombre }}</td>
+                        <td>{{ criterion.porcentaje }}%</td>
+                        <td>
+                            <button pButton icon="pi pi-times" (click)="removeCriterion(criterion)" class="p-button-danger"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <!-- Botón para crear el grupo -->
+        <button pButton label="Crear Grupo" icon="pi pi-check" (click)="createGroup()" [disabled]="!students.length || !criteria.length"></button>
+    </div>
+</div>
