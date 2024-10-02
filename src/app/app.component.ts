@@ -21,7 +21,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.items = [
-      { label: 'Página Principal', icon: 'pi pi-fw pi-home', routerLink: '/' },
+      { label: 'Página Principal', icon: 'pi pi-fw pi-home', routerLink: '/user' },
       { label: 'Lista de Estudiantes', icon: 'pi pi-fw pi-users', routerLink: '/spreed' },
       { label: 'Nuevo Grupo', icon: 'pi pi-fw pi-plus', routerLink: '/spreed/nuevo' },
       { label: 'Configuraciones', icon: 'pi pi-fw pi-cog', routerLink: '/settings' }
