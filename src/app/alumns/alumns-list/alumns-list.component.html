@@ -24,7 +24,6 @@
         </th>
         <th>Nombres</th>
         <th>Apellidos</th>
-        <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-alumn>
@@ -34,10 +33,6 @@
         </td>
         <td>{{ alumn.names }}</td>
         <td>{{ alumn.last_names }}</td>
-        <td>
-          <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" />
-          <p-button icon="pi pi-trash" severity="warning" [rounded]="true" />
-        </td>
       </tr>
     </ng-template>
   </p-table>

@@ -34,12 +34,12 @@ export class AppTopbarComponent {
             icon: 'pi pi-search',
             items: [
                 {
-                    label: 'Modificar',
-                    icon: 'pi pi-pencil'
-                },
-                {
                     label: 'Nuevo Grupo',
                     icon: 'pi pi-plus',
+                },
+                {
+                    label: 'Modificar',
+                    icon: 'pi pi-pencil'
                 }
             ]
         },
