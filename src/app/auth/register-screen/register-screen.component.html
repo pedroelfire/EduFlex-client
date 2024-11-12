@@ -1,0 +1,31 @@
+<p-toast />
+<div class="flex justify-content-center align-items-center" style="height: 100vh">
+    <form (submit)="onSubmit()" [formGroup]="registerForm">
+        <p-card [style]="{ width: '30rem' }">
+            <div class="text-center mb-5">
+                <img src="icon.svg" alt="Image" height="50" class="mb-3">
+                <div class="text-900 text-3xl font-medium mb-3">Crea una cuenta</div>
+                <span class="text-600 font-medium line-height-3">Ya tienes una cuenta?</span>
+                <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" href="auth/login">Inicia sesion</a>
+            </div>
+            <div class="field">
+                <label for="name">Usuario</label>
+                <input id="name" pInputText formControlName="name"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" pInputText formControlName="email"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+            </div>
+            <div class="field">
+                <label for="password">Contraseña</label>
+                <input id="password" pInputText formControlName="password" type="password"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+            </div>
+            <div class="field">
+                <button pButton label="Crear cuenta" [disabled]="!registerForm.valid"></button>
+            </div>
+        </p-card>
+    </form>
+</div>

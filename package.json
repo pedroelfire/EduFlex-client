@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.6.0",
     "clsx": "^2.1.1",
     "embla-carousel-angular": "^14.0.0",
+    "file-saver": "^2.0.5",
     "ngx-scrollbar": "^13.0.1",
     "ngx-sonner": "^2.0.0",
     "primeflex": "^3.3.1",
@@ -33,6 +34,7 @@
     "quill": "^2.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
@@ -40,6 +42,7 @@
     "@angular/cli": "^18.2.6",
     "@angular/compiler-cli": "^18.2.0",
     "@spartan-ng/cli": "^0.0.1-alpha.366",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.20",
     "jasmine-core": "~5.2.0",

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { LoginScreenComponent } from '../auth/login-screen/login-screen.component';
+import { RegisterScreenComponent } from '../auth/register-screen/register-screen.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginScreenComponent },  // Ruta para la lista de productos
+  { path: 'login', component: LoginScreenComponent },  
+  { path: 'register', component: RegisterScreenComponent },  
 ];
 
 @NgModule({

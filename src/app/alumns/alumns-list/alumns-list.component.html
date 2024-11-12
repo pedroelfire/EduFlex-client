@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+<div class="card">
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <app-create-alumn (successOnCreation)="loadTable(lastTableEvent)"></app-create-alumn>
+      <p-button (click)="deleteSelectedProducts()" label="Eliminar alumnos" severity="danger" icon="pi pi-trash"
+        [disabled]="!selectedAlumns || !selectedAlumns.length"></p-button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Importar" chooseLabel="Importar"
+        class="mr-2 inline-block"></p-fileUpload>
+      <button pButton pRipple label="Exportar" (click)="exportExcel()" icon="pi pi-file-excel"
+        class="p-button-help"></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table [value]="alumns" responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadTable($event)"
+    [(selection)]="selectedAlumns">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-alumn>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="alumn"></p-tableCheckbox>
+        </td>
+        <td>{{ alumn.names }}</td>
+        <td>{{ alumn.last_names }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" />
+          <p-button icon="pi pi-trash" severity="warning" [rounded]="true" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
