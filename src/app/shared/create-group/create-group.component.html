@@ -1,0 +1,24 @@
+<p-toast></p-toast>
+<button pButton icon="pi pi-plus" class="p-button-success mr-2" label="Crear Grupo"
+  (click)="showCreateAlumnDialog = true"></button>
+<p-dialog header="Crear Grupo" [scrollLeft]="false" [scrollTop]="false" [modal]="true"
+  [(visible)]="showCreateAlumnDialog" [style]="{ width: '92rem', height: '80rem', overflow: 'hidden' }"
+  [closable]="false">
+  <div class="form-container" [ngStyle]="{ 'width': steps.length * 100 + '%', 'height':'90%' }"
+    [ngClass]="{ 'move-left': currentStep > 0 }" [style.transform]="getTransform()">
+    <div *ngFor="let step of steps; let i = index" class="step">
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.content }}</p>
+    </div>
+  </div>
+  <div class="dialog-footer">
+    <button [disabled]="!(currentStep > 0)" pButton label="Atrás" icon="pi pi-arrow-left" (click)="goToPreviousStep()"
+      class="p-button-secondary" [text]="true" [raised]="true"></button>
+    <button *ngIf="currentStep != steps.length - 1" [disabled]="!(currentStep < steps.length - 1)" pButton
+      label="Siguiente" icon="pi pi-arrow-right" iconPos="right" (click)="goToNextStep()" class="p-button-primary"
+      [text]="true" [raised]="true"></button>
+    <button *ngIf="currentStep == steps.length - 1" pButton
+      label="Guardar" icon="pi pi-check" iconPos="right" (click)="goToNextStep()" class="p-button-success"
+      [text]="true" [raised]="true"></button>
+  </div>
+</p-dialog>

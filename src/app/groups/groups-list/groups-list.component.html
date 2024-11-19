@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+<div class="card">
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+        <app-create-group (successOnCreation)="loadTable(lastTableEvent)"></app-create-group>
+      <p-button (click)="deleteSelectedGroups()" label="Eliminar alumnos" severity="danger" icon="pi pi-trash"
+        [disabled]="!selectedGroups || !selectedGroups.length"></p-button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+      <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Importar" chooseLabel="Importar"
+        class="mr-2 inline-block"></p-fileUpload>
+      <button pButton pRipple label="Exportar" icon="pi pi-file-excel"
+        class="p-button-help"></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table [value]="groups" responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadTable($event)"
+    [(selection)]="selectedGroups">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Nombre del grupo</th>
+        <th>Grado</th>
+        <th>Promedio calificacion</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-group>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="group"></p-tableCheckbox>
+        </td>
+        <td>{{ group.name }}</td>
+        <td>{{ group.grade }}</td>
+        <td><p-tag [value]="group.alumn_count" [severity]="group.alumn_count === 0 ? 'danger' : 'success'"/></td>
+        <td><p-button (onClick)="showManageAlumnsDialog = true && selectedGroup = group.group_id" label="Administrar alumnos"/></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<app-manage-alumns-group-dialog [(showDialog)]="showManageAlumnsDialog" [selectedGroupId]="selectedGroup"></app-manage-alumns-group-dialog>
