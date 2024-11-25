@@ -1,0 +1,57 @@
+/* Estilo para la tabla */
+.custom-table {
+    width: 100%;
+  }
+  
+  .custom-table th, 
+  .custom-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  /* Estilo para la fila cuando la suma de criterios no es 100 */
+  .row-red {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* Estilo para el input de filtro */
+  .filter-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  /* Botón guardar */
+  .save-button {
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Contenedor de los criterios */
+  .criteria-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .criteria-container label {
+    font-size: 16px;
+    flex: 1;
+    text-align: right;
+  }
+  
+  .criteria-container input {
+    flex: 2;
+    min-width: 50px;
+    max-width: 80px;
+    text-align: center;
+    font-size: 18px;
+    padding: 6px;
+  }
+  

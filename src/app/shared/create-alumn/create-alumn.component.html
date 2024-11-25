@@ -1,9 +1,9 @@
 <p-toast></p-toast>
-<button pButton icon="pi pi-plus" class="p-button-success mr-2" label="Agregar alumnos"
+<button pButton icon="pi pi-plus" class="p-button-success mr-2" label="Crear Alumnos"
   (click)="showCreateAlumnDialog = true"></button>
 
 <p-dialog header="Crea un nuevo alumno" [modal]="true" [(visible)]="showCreateAlumnDialog"
-  [style]="{ width: '92rem' }">
+  [style]="{ width: '92%' }" appendTo="body">
   
   <form [formGroup]="alumnForm" (ngSubmit)="addAlumn()">
     <div class="formgrid grid mt-4">

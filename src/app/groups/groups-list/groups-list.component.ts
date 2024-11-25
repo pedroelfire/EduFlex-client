@@ -20,7 +20,7 @@ import { ManageAlumnsGroupDialogComponent } from "../../shared/manage-alumns-gro
   selector: 'app-groups-list',
   standalone: true,
   imports: [TableModule, DialogModule, RippleModule, ButtonModule, ToastModule, ToolbarModule,
-    CommonModule, FormsModule, ReactiveFormsModule, CreateAlumnComponent, FileUploadModule, 
+    CommonModule, FormsModule, ReactiveFormsModule, FileUploadModule, 
     ConfirmDialogModule, CreateGroupComponent, TagModule, ManageAlumnsGroupDialogComponent],
   providers: [MessageService,ConfirmationService],
   templateUrl: './groups-list.component.html',

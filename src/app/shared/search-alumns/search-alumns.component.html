@@ -1,0 +1,2 @@
+<p-autoComplete [(ngModel)]="alumn" [suggestions]="suggestedAlumns" (completeMethod)="filterAlumn($event)" 
+    (onSelect)="onAlumnSelected($event)" placeholder="Busca alumnos" optionLabel="names" optionValue="alumn_id" class="w-full" />

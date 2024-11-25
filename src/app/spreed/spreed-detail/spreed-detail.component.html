@@ -1,1 +1,74 @@
-<p>spreed-detail works!</p>
+<p-toast></p-toast>
+
+<p-table #dt1 [value]="alumns" responsiveLayout="scroll" class="custom-table"
+    [globalFilterFields]="['names', 'last_names']">
+    <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-wrap">
+            <button pButton label="Volver" icon="pi pi-arrow-left" (click)="goBack()" severity="info"></button>
+
+            <div>
+                <i class="pi pi-search"></i>
+                <input class="ml-2" type="text" pInputText size="50" placeholder="Buscar por Nombre o Apellido"
+                    (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                    style="width:auto; padding: 5px;" />
+            </div>
+            <button pButton label="Guardar cambios" icon="pi pi-save" (click)="onSubmit()" severity="success"
+                [disabled]="!isValid()"> <!-- Desactivar si la validación falla -->
+            </button>
+            <!-- Botón de Volver -->
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Calificación Actual</th>
+            <th *ngFor="let criterio of getCriteriosHeaders()">{{ criterio }}</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student let-i="rowIndex">
+        <tr [ngClass]="{'row-red': !isSumaCorrecta(student) || getCalificacionActual(student) > 100 || getCalificacionActual(student) < 0}">
+            <td>{{ student.names }}</td>
+            <td>{{ student.last_names }}</td>
+            <td>
+                <p-tag [value]="getCalificacionActual(student).toString()"
+                    [severity]="getSeverity(getCalificacionActual(student))"></p-tag>
+            </td>
+            <td *ngFor="let criterio of student.criteria">
+                <div class="criteria-container">
+                    <label for="calificacion-{{ student.alumn_id }}-{{ criterio.criteria_id }}">Calificación:</label>
+                    <input pInputText id="calificacion-{{ student.alumn_id }}-{{ criterio.criteria_id }}" type="number"
+                        [(ngModel)]="criterio.grade" placeholder="Calificación" min="0" max="100"
+                        (ngModelChange)="validatePorcentajes(student)" />
+                </div>
+                <div class="criteria-container">
+                    <label for="porcentaje-{{ student.alumn_id }}-{{ criterio.criteria_id }}">Porcentaje:</label>
+                    <input pInputText id="porcentaje-{{ student.alumn_id }}-{{ criterio.criteria_id }}" type="number"
+                        [(ngModel)]="criterio.value" placeholder="Porcentaje" min="0" max="100"
+                        (ngModelChange)="validatePorcentajes(student)" />
+                </div>
+            </td>
+            <td>
+                <app-obvservations [(alumn)]="alumns[i]"></app-obvservations>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-messages *ngIf="percentageWarning" severity="warn" text="Los porcentajes no suman 100%"></p-messages>
+
+<p-dialog header="Detalles del Alumno" [(visible)]="displayDialog" [modal]="true" [responsive]="true"
+    [style]="{ width: '50vw', height:'70vw' }" (onHide)="onDialogHide()">
+    <ng-template pTemplate="header">
+        <h2>{{ selectedStudent.names }} {{ selectedStudent.last_names }}</h2>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <h3>Observaciones:</h3>
+        <p-editor [(ngModel)]="selectedStudent.observations"  [style]="{ height:'30rem' }" 
+            placeholder="'Escribe tus observaciones aquí...'"></p-editor>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton label="Listo" icon="pi pi-check" (click)="displayDialog = false"></button>
+    </ng-template>
+</p-dialog>

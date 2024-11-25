@@ -1,4 +1,5 @@
-<p-dialog [(visible)]="showDialog" (onHide)="showDialogChange.emit(false)" [modal]="true" [style]="{'width': '80rem'}">
+<p-toast></p-toast>
+<p-dialog [(visible)]="showDialog" (onHide)="showDialogChange.emit(false)" header="Alumnos en este grupo" [modal]="true" class="w-full">
     <div class="card">
         <p-table *ngIf="showDialog" class="w-full" [value]="alumnsInGroup" responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadTable($event)">
             <ng-template pTemplate="header">
@@ -8,13 +9,13 @@
                     <th>Acciones</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-alumn>
+            <ng-template pTemplate="body" let-alumn let-i="rowIndex">
                 <tr>
-                    <td rowspan="2">{{ alumn.names }}</td>
-                    <td rowspan="2">{{ alumn.last_names }}</td>
+                    <td >{{ alumn.names }}</td>
+                    <td >{{ alumn.last_names }}</td>
                     <td>
-                        <p-button label="Observaciones" severity="info"></p-button>
-                        <p-button label="Eliminar" severity="danger"></p-button>
+                        <app-obvservations [(alumn)]="alumnsInGroup[i]" [selfSave]="true"></app-obvservations>
+                        <p-button label="Eliminar" severity="danger" class="ml-2" (onClick)="deleteAlumnFormGroup(alumn.alumn_id)"></p-button>
                     </td>
                 </tr>
             </ng-template>
@@ -26,3 +27,5 @@
         </p-table>
     </div>
 </p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

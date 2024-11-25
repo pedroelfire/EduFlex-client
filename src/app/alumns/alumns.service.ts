@@ -33,4 +33,14 @@ export class AlumnsService {
   insertAlumns(registerAlumns: CreateAlumn[]): Observable<number[]> {
     return this.http.post<number[]>(this.apiUrl, {alumns:registerAlumns}, this.getHttpOptions());
   }
+
+  suggestedAlumns(name: string = '', exclutions:Alumn['alumn_id'][] = []): Observable<Alumn[]> {
+    const params = new HttpParams().set('name', name).set('exclutions',JSON.stringify(exclutions))
+    return this.http.get<Alumn[]>(this.apiUrl + '/suggestedAlumns', {params, ...this.getHttpOptions()});
+  }
+
+  updateAlumns(alumn:Alumn){
+    return this.http.put(this.apiUrl + '/' + alumn.alumn_id, {alumn}, this.getHttpOptions());
+
+  }
 }

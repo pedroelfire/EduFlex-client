@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { LocalService } from "../shared/storage.service";
-import { alumnsInGroupAndNotInGroupResponse, CreateGroup, Group } from "./groups.model";
-import { Alumn } from "../alumns/alumns.model";
+import { alumnsInGroupAndNotInGroupResponse, CreateGroup, Group, groupDetail } from "./groups.model";
+import { Alumn, AlumnCriteria } from "../alumns/alumns.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +41,14 @@ export class GroupsService {
 
   alumnsInGroupAndNotInGroup(group_id: Group['group_id']): Observable<alumnsInGroupAndNotInGroupResponse> {
     return this.http.get<alumnsInGroupAndNotInGroupResponse>(this.apiUrl + "/alumnsInGroupAndNotInGroup/" + group_id, this.getHttpOptions());
+  }
+  getGroupDetails(group_id:number):Observable<groupDetail>{
+    return this.http.get<groupDetail>(this.apiUrl + "/getGroupDetails/" + group_id, this.getHttpOptions());
+  }
+  updateGroupDetails(alumns:AlumnCriteria[]){
+    return this.http.put(this.apiUrl + "/updateStudentCriteria", alumns, this.getHttpOptions())
+  }
+  deleteAlumnFromGroup(alumn_id: Alumn['alumn_id'], group_id:Group['group_id']){
+    return this.http.delete(this.apiUrl + "/" + group_id + "/alumn/" + alumn_id, this.getHttpOptions())
   }
 }

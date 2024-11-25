@@ -39,7 +39,7 @@ constructor(
         next: (response) => {
           this.localStorage.saveData("email", this.loginForm.get("email")!.value)
           this.localStorage.saveData("token", response.token)
-          this.router.navigate([""])
+          this.router.navigate(["/spreed"])
         },
         error: (err) => {
           this.messageService.add({

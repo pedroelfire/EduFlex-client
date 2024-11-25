@@ -24,7 +24,7 @@
         </th>
         <th>Nombre del grupo</th>
         <th>Grado</th>
-        <th>Promedio calificacion</th>
+        <th>Alumnos Inscritos</th>
         <th>Acciones</th>
       </tr>
     </ng-template>
@@ -39,8 +39,13 @@
         <td><p-button (onClick)="showManageAlumnsDialog = true && selectedGroup = group.group_id" label="Administrar alumnos"/></td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">No cuentas con ningun grupo registrado.</td>
+      </tr>
+    </ng-template>
   </p-table>
 </div>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-<app-manage-alumns-group-dialog [(showDialog)]="showManageAlumnsDialog" [selectedGroupId]="selectedGroup"></app-manage-alumns-group-dialog>
+<app-manage-alumns-group-dialog [(showDialog)]="showManageAlumnsDialog" [selectedGroupId]="selectedGroup" ></app-manage-alumns-group-dialog>
