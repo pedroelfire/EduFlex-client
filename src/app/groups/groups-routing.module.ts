@@ -12,4 +12,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [MessageService]
 })
-export class AlumnsRoutingModule { }
+export class GroupsRoutingModule { }

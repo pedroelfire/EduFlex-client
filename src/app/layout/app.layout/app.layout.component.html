@@ -1,12 +1,17 @@
 <div class="layout-wrapper">
-    <app-topbar></app-topbar>
-    <!-- <div class="layout-sidebar"> -->
-        <!-- <app-sidebar></app-sidebar> -->
-    <!-- </div> -->
+    <!-- Top Bars -->
+    <ng-container *ngIf="router.isActive('', false)">
+        <app-landing-topbar></app-landing-topbar>
+    </ng-container>
+    <ng-container *ngIf="!router.isActive('', false) && !router.isActive('/auth', false)">
+        <app-topbar></app-topbar>
+    </ng-container>
+
+    <!-- Main Content -->
     <div class="layout-main-container">
         <div class="layout-main">
             <router-outlet></router-outlet>
         </div>
     </div>
-    <div class="layout-mask"></div>
+
 </div>

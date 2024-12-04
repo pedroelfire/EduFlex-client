@@ -1,6 +1,7 @@
 <p-card header="Grupos Para Calificar">
+    <p>Selecciona un grupo y empieza a calificar</p>
+
     <div *ngFor="let group of groups">
-        <p>Selecciona un grupo y empieza a calificar</p>
         <p-card header="{{group.name}} - {{group.grade}}" [style]="{'margin-top':'4rem'}">
             <div class="flex justify-content-between flex-wrap">
                 <p class="m-0">

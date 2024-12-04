@@ -1,0 +1,21 @@
+<p-menubar [model]="items" class="custom-menubar" >
+    <ng-template pTemplate="start">
+      <img class="ml-4 mr-4" src="./icon.svg" width="33" height="35" />
+    </ng-template>
+    <ng-template pTemplate="item" let-item let-root="root">
+      <a pRipple class="flex align-items-center p-menuitem-link" [routerLink]="item.routerLink">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-2">
+        <p-avatar icon="pi pi-user" shape="circle" styleClass="cursor-pointer" (click)="op.toggle($event)"></p-avatar>
+        <p-overlayPanel #op>
+          <div class="p-3">
+          </div>
+        </p-overlayPanel>
+      </div>
+    </ng-template>
+  </p-menubar>
+  

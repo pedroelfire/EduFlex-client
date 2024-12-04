@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout/app.layout.component';
 import { hasTokenGuard } from './guards/has-token.guard';
+import { HomeLandingComponent } from './home/home-landing/home-landing.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: '', // Rutas con overlay
     component: AppLayoutComponent,
     canActivate: [hasTokenGuard],
     children: [
@@ -20,19 +21,23 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./alumns/alumns-routing.module').then(
             (m) => m.AlumnsRoutingModule
-          )
+          ),
       },
       {
         path: 'groups',
         loadChildren: () =>
           import('./groups/groups-routing.module').then(
-            (m) => m.AlumnsRoutingModule
-          )
+            (m) => m.GroupsRoutingModule
+          ),
+      },
+      {
+        path: '', // Ruta inicial para la landing page
+        component: HomeLandingComponent,
       },
     ],
   },
   {
-    path: 'auth',
+    path: 'auth', // Ruta de autenticación sin overlay
     loadChildren: () =>
       import('./users/users-routing.module').then((m) => m.UsersRoutingModule),
   },
