@@ -51,4 +51,11 @@ export class GroupsService {
   deleteAlumnFromGroup(alumn_id: Alumn['alumn_id'], group_id:Group['group_id']){
     return this.http.delete(this.apiUrl + "/" + group_id + "/alumn/" + alumn_id, this.getHttpOptions())
   }
+
+  downloadAlumnsGrades(group_id: Group['group_id']) {
+    return this.http.get(this.apiUrl + "/downloadGroupGrades/" + group_id, {
+      responseType: 'arraybuffer',
+      headers: this.getHttpOptions().headers
+    });
+  }
 }

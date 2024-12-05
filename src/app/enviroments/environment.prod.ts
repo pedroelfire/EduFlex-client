@@ -1,6 +1,6 @@
 // src/environments/environment.ts
-export const environment = {
+  export const environment = {
     production: true,
-    apiUrl: 'http://localhost:3000/api'  // URL de la API para desarrollo
+    apiUrl: 'https://eduflex-backend-production.up.railway.app'  
   };
   

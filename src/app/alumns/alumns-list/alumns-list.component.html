@@ -3,7 +3,7 @@
   <p-toolbar styleClass="mb-4 gap-2">
     <ng-template pTemplate="left">
       <app-create-alumn (successOnCreation)="loadTable(lastTableEvent)"></app-create-alumn>
-      <p-button (click)="deleteSelectedProducts()" label="Eliminar alumnos" severity="danger" icon="pi pi-trash"
+      <p-button (click)="deleteSelectedAlumns()" label="Eliminar alumnos" severity="danger" icon="pi pi-trash"
         [disabled]="!selectedAlumns || !selectedAlumns.length"></p-button>
     </ng-template>
 
@@ -24,15 +24,20 @@
         </th>
         <th>Nombres</th>
         <th>Apellidos</th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-alumn>
+    <ng-template pTemplate="body" let-alumn let-i="rowIndex">
       <tr>
         <td>
           <p-tableCheckbox [value]="alumn"></p-tableCheckbox>
         </td>
         <td>{{ alumn.names }}</td>
         <td>{{ alumn.last_names }}</td>
+        <td>
+          <app-obvservations [selfSave]="true" [(alumn)]="alumns[i]"></app-obvservations>
+        </td>
+
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">

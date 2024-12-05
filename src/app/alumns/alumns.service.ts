@@ -34,6 +34,11 @@ export class AlumnsService {
     return this.http.post<number[]>(this.apiUrl, {alumns:registerAlumns}, this.getHttpOptions());
   }
 
+  deleteAlumns(alumnsIds: Alumn['alumn_id'][]): Observable<string> {
+    const params = new HttpParams().set('ids', JSON.stringify(alumnsIds))
+    return this.http.delete<string>(this.apiUrl, {params, ...this.getHttpOptions()});
+  }
+
   suggestedAlumns(name: string = '', exclutions:Alumn['alumn_id'][] = []): Observable<Alumn[]> {
     const params = new HttpParams().set('name', name).set('exclutions',JSON.stringify(exclutions))
     return this.http.get<Alumn[]>(this.apiUrl + '/suggestedAlumns', {params, ...this.getHttpOptions()});
@@ -41,6 +46,5 @@ export class AlumnsService {
 
   updateAlumns(alumn:Alumn){
     return this.http.put(this.apiUrl + '/' + alumn.alumn_id, {alumn}, this.getHttpOptions());
-
   }
 }

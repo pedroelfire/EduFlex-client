@@ -14,13 +14,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import * as FileSaver from 'file-saver';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ObvservationsComponent } from "../../shared/obvservations/obvservations.component";
 
 @Component({
   selector: 'app-alumns-list',
   standalone: true,
   imports: [TableModule, DialogModule, RippleModule, ButtonModule, ToastModule, ToolbarModule,
-    CommonModule, FormsModule, ReactiveFormsModule, CreateAlumnComponent, FileUploadModule, ConfirmDialogModule],
-  providers: [MessageService,ConfirmationService],
+    CommonModule, FormsModule, ReactiveFormsModule, CreateAlumnComponent, FileUploadModule, ConfirmDialogModule, ObvservationsComponent],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './alumns-list.component.html',
   styleUrl: './alumns-list.component.scss'
 })
@@ -40,24 +41,31 @@ export class AlumnsListComponent {
     this.lastTableEvent = event
     this.alumnsService.getAlumn().subscribe({
       next: (response) => {
-        console.log(response)
         this.alumns = response
       }
     })
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedAlumns() {
     this.confirmationService.confirm({
-        message: 'Estas seguro de eliminar a los alumnos seleccionados?',
-        header: 'Confirmacion',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.alumns = this.alumns.filter(val => !this.selectedAlumns.includes(val));
-            this.selectedAlumns = [];
-            this.messageService.add({severity:'success', summary: 'Exito', detail: 'Alumnos eliminados de manera satisfactoria', life: 3000});
-        }
+      message: 'Estas seguro de eliminar a los alumnos seleccionados?',
+      header: 'Confirmacion',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        const alumnsToDelete = this.selectedAlumns.map(alumn => alumn.alumn_id)
+        this.alumnsService.deleteAlumns(alumnsToDelete).subscribe({
+          next: ()=>{
+            this.alumns = this.alumns.filter(alumn => !alumnsToDelete.includes(alumn.alumn_id));
+            this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Alumnos eliminados de manera satisfactoria', life: 3000 });
+          },
+          error: ()=>{
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ocurrio un error al eliminar los alumnos', life: 3000 });
+
+          }
+        }) 
+      }
     });
-}
+  }
 
   exportExcel() {
     import("xlsx").then(xlsx => {

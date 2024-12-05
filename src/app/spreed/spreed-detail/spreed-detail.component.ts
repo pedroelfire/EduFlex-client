@@ -15,6 +15,7 @@ import { Group } from '../../groups/groups.model';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ObvservationsComponent } from "../../shared/obvservations/obvservations.component";
+import { LoadingService } from '../../shared/loading.service';
 
 @Component({
   selector: 'app-spreed-detail',
@@ -27,7 +28,7 @@ import { ObvservationsComponent } from "../../shared/obvservations/obvservations
 export class SpreedDetailComponent implements OnInit {
   alumns: AlumnCriteria[] = []
   group: Group | null = null
-  globalFilterValue: string = '';  // El valor del filtro global
+  globalFilterValue: string = '';
   percentageWarning: boolean = false;
   displayDialog: boolean = false;
   selectedStudent: any;
@@ -36,7 +37,8 @@ export class SpreedDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private groupsService: GroupsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private loadingService: LoadingService
   ) {
     this.groupsService.getGroupDetails(parseInt(this.route.snapshot.paramMap.get('id')!)).subscribe({
       next: (response) => {
@@ -51,12 +53,12 @@ export class SpreedDetailComponent implements OnInit {
   }
 
   showDetails(student: any) {
-    this.selectedStudent = student; // Asigna el estudiante seleccionado
-    this.displayDialog = true; // Abre el diálogo
+    this.selectedStudent = student;
+    this.displayDialog = true;
   }
 
   onDialogHide() {
-    this.selectedStudent = null; // Resetea el estudiante seleccionado al cerrar el diálogo
+    this.selectedStudent = null;
   }
 
   getCriteriosHeaders() {
@@ -78,25 +80,23 @@ export class SpreedDetailComponent implements OnInit {
       return sum + (criterio.grade || 0) * (criterio.value || 0) / 100;
     }, 0);
 
-    return totalCalificacion; // Devuelve la calificación actual total
+    return totalCalificacion;
   }
 
   getSeverity(calificacion: number) {
     if (calificacion >= 70) {
-      return 'success'; // Verde
+      return 'success';
     } else if (calificacion >= 40) {
-      return 'warning'; // Amarillo
+      return 'warning';
     } else {
-      return 'danger'; // Rojo
+      return 'danger';
     }
   }
 
-  // Función para verificar si la suma de los criterios de un alumno es 100
   getSumaCriterios(student: any): number {
     return student.criteria.reduce((sum: number, criterio: any) => sum + criterio.value, 0);
   }
 
-  // Función para verificar si la suma es 100
   isSumaCorrecta(student: any): boolean {
     return this.getSumaCriterios(student) === 100;
   }
@@ -107,7 +107,6 @@ export class SpreedDetailComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Cambios guardados correctamente', life: 3000 });
       },
       error: (error) => {
-        console.log("ola")
         this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.message || 'Ocurrió un error desconocido', life: 3000 });
       }
     })
@@ -119,12 +118,11 @@ export class SpreedDetailComponent implements OnInit {
       const totalPercentage = student.criteria.reduce((sum, criterio) => sum + (criterio.value || 0), 0);
       if (totalPercentage !== 100) {
         isValid = false;
-        this.percentageWarning = true;  // Mostrar advertencia si no suma 100%
+        this.percentageWarning = true; 
       } else {
         this.percentageWarning = false;
       }
 
-      // Validar que los valores de calificación y porcentaje estén entre 0 y 100
       student.criteria.forEach(criterio => {
         if (criterio.grade! < 0 || criterio.grade! > 100 || criterio.value < 0 || criterio.value > 100) {
           isValid = false;
@@ -135,9 +133,22 @@ export class SpreedDetailComponent implements OnInit {
     return isValid;
   }
 
+  downloadGroupGrades() {
+    this.groupsService.downloadAlumnsGrades(this.group!['group_id']).subscribe({
+      next: (response: ArrayBuffer) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        setTimeout(() => window.URL.revokeObjectURL(url), 10000);
+      },
+      error: (err) => {
+        console.error('Error al obtener el PDF:', err);
+      }
+    });
+  }
 
   goBack() {
-    this.router.navigate(['/spreed']);  // Aquí se redirige a la ruta principal (SpreedListComponent)
+    this.router.navigate(['/spreed']);
   }
 
 

@@ -6,11 +6,52 @@
     </ng-template>
     <ng-template pTemplate="body">
         <h3>Observaciones:</h3>
-        <p-editor [(ngModel)]="alumn!.observations"  [style]="{ height:'30rem' }" 
-            placeholder="'Escribe tus observaciones aquí...'"></p-editor>
+        <p-editor [(ngModel)]="alumn!.observations" [style]="{'height':'30rem'}">
+            <ng-template pTemplate="header">
+                <span class="ql-formats">
+                    <select class="ql-font" aria-label="Font">
+                        <option selected>Sans Serif</option>
+                        <option value="serif">Serif</option>
+                        <option value="monospace">Monospace</option>
+                    </select>
+                </span>
+                <span class="ql-formats">
+                    <select class="ql-header" aria-label="Header">
+                        <option selected></option>
+                        <option value="1">Heading 1</option>
+                        <option value="2">Heading 2</option>
+                        <option value="3">Heading 3</option>
+                    </select>
+                </span>
+                <span class="ql-formats">
+                    <button type="button" class="ql-bold" aria-label="Bold"></button>
+                    <button type="button" class="ql-italic" aria-label="Italic"></button>
+                    <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    <button type="button" class="ql-strike" aria-label="Strikethrough"></button>
+                </span>
+                <span class="ql-formats">
+                    <button type="button" class="ql-list" value="ordered" aria-label="Ordered List"></button>
+                    <button type="button" class="ql-list" value="bullet" aria-label="Bullet List"></button>
+                </span>
+
+                <span class="ql-formats">
+                    <button type="button" class="ql-align" value="" aria-label="Left Align"></button>
+                    <button type="button" class="ql-align" value="center" aria-label="Center Align"></button>
+                    <button type="button" class="ql-align" value="right" aria-label="Right Align"></button>
+                    <button type="button" class="ql-align" value="justify" aria-label="Justify"></button>
+                </span>
+                <span class="ql-formats">
+                    <button type="button" class="ql-clean" aria-label="Remove Formatting"></button>
+                </span>
+                <span class="ql-formats">
+                    <button type="button" class="ql-link" aria-label="Insert Link"></button>
+                </span>
+            </ng-template>
+        </p-editor>
     </ng-template>
     <ng-template pTemplate="footer">
         <button *ngIf="!selfSave" pButton label="Listo" icon="pi pi-check" (click)="displayDialog = false"></button>
-        <button *ngIf="selfSave" pButton label="Guardar" severity="success" icon="pi pi-check" (click)="saveObservations() "></button>
+        <button *ngIf="selfSave" pButton label="Guardar" severity="success" icon="pi pi-check"
+            (click)="saveObservations() "></button>
     </ng-template>
 </p-dialog>

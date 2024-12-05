@@ -20,7 +20,7 @@ export class ObvservationsComponent {
   @Input() alumn: any | Alumn
   @Input() selfSave:boolean =  false
   @Output() alumnChange = new EventEmitter<Alumn>()
-
+  
   constructor(
     private alumnsService: AlumnsService,
     private messageService: MessageService

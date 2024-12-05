@@ -12,6 +12,9 @@
                     (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
                     style="width:auto; padding: 5px;" />
             </div>
+            <button pButton label="Descargar calificaciones" icon="pi pi-save" (click)="downloadGroupGrades()" 
+            [disabled]="!isValid()"> <!-- Desactivar si la validación falla -->
+        </button>
             <button pButton label="Guardar cambios" icon="pi pi-save" (click)="onSubmit()" severity="success"
                 [disabled]="!isValid()"> <!-- Desactivar si la validación falla -->
             </button>
