@@ -49,7 +49,6 @@ constructor(
             detail:
               "Usuario o contraseña incorrectos"
           });
-          console.log(err)
         },
       })
   }

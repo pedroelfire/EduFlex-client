@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
 import { TagModule } from 'primeng/tag';
@@ -16,11 +16,13 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ObvservationsComponent } from "../../shared/obvservations/obvservations.component";
 import { LoadingService } from '../../shared/loading.service';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
   selector: 'app-spreed-detail',
   standalone: true,
-  imports: [TableModule, InputTextModule, FormsModule, NgClass, NgFor, MessagesModule, TagModule, DialogModule, ButtonModule, EditorModule, ToastModule, ObvservationsComponent],
+  imports: [TableModule, InputTextModule, FormsModule, NgClass, NgFor, MessagesModule, TagModule, 
+    DialogModule, ButtonModule, EditorModule, ToastModule, ObvservationsComponent, ToolbarModule, CommonModule],
   providers: [MessageService],
   templateUrl: './spreed-detail.component.html',
   styleUrls: ['./spreed-detail.component.scss'],
@@ -64,7 +66,6 @@ export class SpreedDetailComponent implements OnInit {
   getCriteriosHeaders() {
     if (this.alumns.length > 0) {
       const criterios = this.alumns[0].criteria || [];
-      console.log(criterios)
       return criterios.map(criterio => criterio.name);
     }
     return

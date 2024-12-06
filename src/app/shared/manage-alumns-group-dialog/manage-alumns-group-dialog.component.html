@@ -1,7 +1,8 @@
 <p-toast></p-toast>
-<p-dialog [(visible)]="showDialog" (onHide)="showDialogChange.emit(false)" header="Alumnos en este grupo" [modal]="true" class="w-full">
+<p-dialog [(visible)]="showDialog" (onHide)="showDialogChange.emit(false)" header="Alumnos en este grupo" [modal]="true" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" >
     <div class="card">
-        <p-table *ngIf="showDialog" class="w-full" [value]="alumnsInGroup" responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadTable($event)">
+        <p-table *ngIf="showDialog" responsiveLayout="stack" [tableStyle]="{'min-width': '50rem'}" [value]="alumnsInGroup" 
+        responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadTable($event)">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Nombres</th>

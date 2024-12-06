@@ -52,7 +52,6 @@ export class RegisterScreenComponent {
           summary: 'Error',
           detail: "Ocurrio un error al intentar crear la cuenta"
         });
-        console.log(err)
       },
     })
   }

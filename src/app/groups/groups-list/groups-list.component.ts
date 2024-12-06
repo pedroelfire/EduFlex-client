@@ -50,7 +50,6 @@ export class GroupsListComponent {
     this.lastTableEvent = event
     this.groupsService.getGroups().subscribe({
       next: (response) => {
-        console.log(response)
         this.groups = response
       }
     })

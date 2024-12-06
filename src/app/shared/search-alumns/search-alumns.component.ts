@@ -32,7 +32,6 @@ export class SearchAlumnsComponent {
   }
 
   getSuggestedAlumns(name: string = '') {
-    console.log(this.exclutions)
     this.alumnsService.suggestedAlumns(name, this.exclutions).subscribe({
       next: (response) => {
         this.suggestedAlumns = response

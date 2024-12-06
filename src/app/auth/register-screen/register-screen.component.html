@@ -1,8 +1,8 @@
 <p-toast />
-<div class="flex justify-content-center align-items-center" style="height: 100vh">
+<div class="flex justify-content-center align-items-center w-full" style="height: 100vh">
     <form (submit)="onSubmit()" [formGroup]="registerForm">
-        <p-card [style]="{ width: '30rem' }">
-            <div class="text-center mb-5">
+        <p-card class="w-full sm:min-w-20rem lg:min-w-50rem">
+        <div class="text-center mb-5">
                 <img src="icon.svg" alt="Image" height="50" class="mb-3">
                 <div class="text-900 text-3xl font-medium mb-3">Crea una cuenta</div>
                 <span class="text-600 font-medium line-height-3">Ya tienes una cuenta?</span>

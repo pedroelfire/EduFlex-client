@@ -68,6 +68,7 @@ export class CreateGroupComponent {
         this.messageService.add({severity:'success', summary: 'Exito', detail: 'Grupo creado exitosamente', life: 3000});
         this.showCreateAlumnDialog = false
         this.successOnCreation.emit(true)
+        this.groupForm.reset()
       }
     })
   }

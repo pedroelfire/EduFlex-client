@@ -65,8 +65,8 @@
               "extractLicenses": false,
               "sourceMap": true,
               "fileReplacements": [{
-                "replace": "src/app/enviroments/environment.prod.ts",
-                "with": "src/app/enviroments/enviroment.ts"
+                  "with": "src/app/enviroments/environment.ts",
+                  "replace": "src/app/enviroments/environment.prod.ts"
               }]
             }
           },

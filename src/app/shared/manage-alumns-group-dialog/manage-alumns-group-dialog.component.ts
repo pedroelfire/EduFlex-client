@@ -27,6 +27,8 @@ export class ManageAlumnsGroupDialogComponent {
   @Input() showDialog: boolean = false
   @Input() selectedGroupId: Group['group_id'] = 0
   @Output() showDialogChange = new EventEmitter<boolean>();
+  @Output() successOnDelete = new EventEmitter<boolean>();
+
 
   constructor(
     private alumnsService: AlumnsService,
@@ -38,7 +40,6 @@ export class ManageAlumnsGroupDialogComponent {
     this.lastEvent = event
     this.groupsService.alumnsInGroup(this.selectedGroupId).subscribe({
       next: (response) => {
-        console.log(response)
         this.alumnsInGroup = response;
       },
       error: (err) => console.error("Error fetching alumns:", err)
@@ -55,6 +56,7 @@ export class ManageAlumnsGroupDialogComponent {
             next: ()=>{
               this.messageService.add({severity:'success', summary: 'Exito', detail: 'Alumno eliminado del grupo', life: 3000});
               this.loadTable(this.lastEvent)
+              this.successOnDelete.emit(true)
             }
           })
         }

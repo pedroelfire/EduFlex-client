@@ -1,10 +1,9 @@
-<p-toast></p-toast>
 <button pButton icon="pi pi-plus" class="p-button-success mr-2" label="Crear Grupo"
   (click)="showCreateAlumnDialog = true"></button>
 <form [formGroup]="groupForm">
   <div>
-    <p-dialog header="Crear Grupo" [modal]="true" [(visible)]="showCreateAlumnDialog" [style]="{ width: '60rem' }"
-      [closable]="true">
+    <p-dialog header="Crear Grupo" [modal]="true" [(visible)]="showCreateAlumnDialog" [style]="{ width: '50rem' }"
+      [closable]="true" [maximizable]="true">
 
       <!-- Sección: Nombre y Grado del Grupo -->
       <h3 class="mt-0">Nombre y Grado del Grupo</h3>
@@ -111,7 +110,7 @@
         <button type="button" pButton label="Cancelar" icon="pi pi-times" class="p-button-secondary mr-2"
           (click)="showCreateAlumnDialog = false"></button>
         <button type="button" pButton label="Guardar" icon="pi pi-check" class="p-button-success"
-          (click)="onSubmit()"></button>
+          (click)="onSubmit()" [disabled]="this.alumns.length == 0 || getCriteriaSum() != 100 || groupForm.invalid   "></button>
       </div>
     </p-dialog>
   </div>

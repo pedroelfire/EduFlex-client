@@ -5,3 +5,15 @@
     justify-content: space-between;
     padding: 5rem;
 }
+
+@media (max-width: 768px) { /* Para pantallas más pequeñas, como tablets o teléfonos */
+    .layout-main-container {
+        padding: 1rem; /* Reduce el padding */
+    }
+}
+
+@media (max-width: 480px) { /* Para pantallas muy pequeñas, como teléfonos */
+    .layout-main-container {
+        padding: 0.5rem; /* Ajusta aún más el padding */
+    }
+}
