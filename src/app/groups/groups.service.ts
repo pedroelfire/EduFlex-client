@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { LocalService } from "../shared/storage.service";
 import { alumnsInGroupAndNotInGroupResponse, CreateGroup, Group, groupDetail } from "./groups.model";
 import { Alumn, AlumnCriteria } from "../alumns/alumns.model";
+import { createCriteria } from "../criteria/criteria.model";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class GroupsService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` 
+        'Authorization': `Bearer ${token}`
       })
     };
   }
@@ -57,5 +58,9 @@ export class GroupsService {
       responseType: 'arraybuffer',
       headers: this.getHttpOptions().headers
     });
+  }
+  getGroupCriteria(group_id:number):Observable<createCriteria[]>{
+    return this.http.get<createCriteria[]>(this.apiUrl + "/getGroupCriteria/"
+                                           + group_id, this.getHttpOptions());
   }
 }

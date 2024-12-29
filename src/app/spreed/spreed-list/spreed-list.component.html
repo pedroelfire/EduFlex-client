@@ -1,17 +1,16 @@
 <p-card header="Grupos Para Calificar">
-    <p>Selecciona un grupo y empieza a calificar</p>
-
-    <div *ngFor="let group of groups">
-        <p-card header="{{group.name}} - {{group.grade}}" [style]="{'margin-top':'4rem'}">
-            <div class="flex justify-content-between flex-wrap">
-                <p class="m-0">
-                    Total de alumnos: {{group.alumn_count}}
-                </p>
-                <p-button label="Calificar" (onClick)="goToDetail(group.group_id)" />
-            </div>
-        </p-card>
-    </div>
-    <div *ngIf="groups.length <= 0">
-        No cuentas con ningun grupo, empieza <a href="/alumns/list">creando alumnos</a> o <a href="/groups/list">asignandolos un grupo</a>
-    </div>
+  <p>Selecciona un grupo y empieza a calificar</p>
+  <div *ngFor="let group of groups">
+    <p-card header="{{group.name}} - {{group.grade}}" [style]="{'margin-top':'4rem'}">
+      <div class="flex justify-content-between flex-wrap">
+        <p class="m-0">
+        Total de alumnos: {{group.alumn_count}}
+        </p>
+        <p-button label="Calificar" (onClick)="goToDetail(group.group_id)" />
+      </div>
+    </p-card>
+  </div>
+  <div *ngIf="groups.length == 0">
+    No cuentas con ningun grupo, empieza <a href="/alumns/list">creando alumnos</a> o <a href="/groups/list">asignandolos un grupo</a>
+  </div>
 </p-card>

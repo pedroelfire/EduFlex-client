@@ -11,11 +11,14 @@ import { ObvservationsComponent } from "../obvservations/obvservations.component
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AddAlumnGroupComponent } from '../add-alumn-group/add-alumn-group.component';
 
 @Component({
   selector: 'app-manage-alumns-group-dialog',
   standalone: true,
-  imports: [DialogModule, CommonModule, TableModule, ButtonModule, ObvservationsComponent, ConfirmDialogModule, ToastModule],
+  imports: [DialogModule, CommonModule, TableModule,
+    ButtonModule, ObvservationsComponent, ConfirmDialogModule,
+    ToastModule, AddAlumnGroupComponent],
   providers: [MessageService,ConfirmationService],
   templateUrl: './manage-alumns-group-dialog.component.html',
   styleUrl: './manage-alumns-group-dialog.component.scss'

@@ -1,0 +1,34 @@
+<p-button label="Agregar nuevo alumno" (onClick)='showAddAlumnDialog = true' severity='success'/>
+  <p-dialog [(visible)]='showAddAlumnDialog' [modal]=true
+    [style]="{'minWidth':'50rem', 'minHeight':'50rem'}"
+    [draggable]=false header='Agregar alumnos a grupo'>
+    <div class="card p-2">
+      <app-search-alumns [clearAfterSelect]=true
+        (selectedAlumn)='alumns.push($event) && idsAddedAlumns.push($event.alumn_id)'
+        [(exclutions)]='idsAddedAlumns'>
+      </app-search-alumns>
+      <p-table [value]=alumns>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-alumn let-i="rowIndex">
+          <tr>
+            <td >{{ alumn.names }}</td>
+            <td >{{ alumn.last_names }}</td>
+            <td>
+              <p-button label="Eliminar" severity="warning" (onClick)='removeAlumn(i)'/>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="3">No hay estudiantes inscritos en este grupo</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-dialog>

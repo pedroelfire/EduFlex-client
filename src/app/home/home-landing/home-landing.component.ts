@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -9,5 +10,9 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './home-landing.component.scss'
 })
 export class HomeLandingComponent {
+
+  constructor(
+    public router: Router
+  ){}
 
 }
